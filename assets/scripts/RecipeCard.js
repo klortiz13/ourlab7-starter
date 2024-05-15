@@ -186,4 +186,4 @@ class RecipeCard extends HTMLElement {
 
 // A8. TODO - Define the Class as a customElement so that you can create
 //           'recipe-card' elements
-customeElements.define("recipe-card", RecipeCard);
+customeElements.define('recipe-card', RecipeCard);
