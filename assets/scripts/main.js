@@ -24,7 +24,7 @@ function getRecipesFromStorage() {
 	// A9. TODO - Complete the functionality as described in this function
 	//           header. It is possible in only a single line, but should
 	//           be no more than a few lines.
-	return localStorage.getItem('recipes');
+	return JSON.parse(localStorage.getItem('recipes')) || [];
 }
 
 /**
@@ -41,10 +41,11 @@ function addRecipesToDocument(recipes) {
 	//            create a <recipe-card> element for each one, and populate
 	//            each <recipe-card> with that recipe data using element.data = ...
 	//            Append each element to <main>
-	for (let i = 0; i < recipes.length; i++) {
+	for (let recipe of recipes) {
 		// create recipe object 
 		let currRecipe = document.createElement('recipe-card');
-		currRecipe.data = recipes[i];		
+		currRecipe.data = recipe;		
+		console.log(recipe);
 		// append recipe to main
 		mainRef.appendChild(currRecipe);
 	}
@@ -80,7 +81,7 @@ function initFormHandler() {
 		// B5. TODO - Create an empty object (we'll refer to this object as recipeObject to
 		//            make this easier to read), and then extract the keys and corresponding
 		//            values from the FormData object and insert them into recipeObject
-		let recipeObject = new Object();
+		let recipeObject = {};
 		for (const [key, value] of formdata.entries()) {
 			recipeObject[key] = value;
 		}
@@ -97,12 +98,13 @@ function initFormHandler() {
 		
 		// B9. TODO - Get the recipes array from localStorage, add this new recipe to it, and
 		//            then save the recipes array back to localStorage
-		let recipesArr = localStorage.getItem('recipes');
+		let recipesArr = getRecipesFromStorage();
 		recipesArr.push(recipeObject);
+		saveRecipesToStorage(recipesArr);
 	})
 	
 	// B10. TODO - Get a reference to the "Clear Local Storage" button
-	let clearbutton = document.getElementsByClassName('danger');
+	let clearbutton = document.querySelector('.danger');
 	
 	// B11. TODO - Add a click event listener to clear local storage button
 	clearbutton.addEventListener('click', function(e) {
@@ -111,5 +113,5 @@ function initFormHandler() {
 		// B13. TODO - Delete the contents of <main>
 		const mainElement = document.querySelector('main');
 		mainElement.innerHTML = '';
-	})
+	});
 }

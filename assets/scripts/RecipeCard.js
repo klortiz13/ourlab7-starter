@@ -125,65 +125,81 @@ class RecipeCard extends HTMLElement {
 		//           Remember to replace all the placeholders in the template with the data passed in.
 		//           i.e. imgSrc, titleLnk, etc
 
+        article.innerHTML = `
+        <img src="${data.imgSrc}"
+            alt="${data.imgAlt}">
+        <p class="title">
+            <a href=${data.titleLnk}>${data.titleTxt}</a>
+        </p>
+        <p class="organization">${data.organization}</p>
+        <div class="rating">
+            <span>${data.rating}</span>
+            <img src="./assets/images/icons/${data.rating}-star.svg" alt="${data.rating} stars">
+            <span>${data.numRatings}</span>
+        </div>
+        <time>${data.lengthTime}</time>
+        <p class="ingredients">
+            ${data.ingredients}
+        </p>`;
 		// Create <img> for article
-		let art_image = document.createElement('img');
-		art_image.src = data["imgSrc"];
-		art_image.alt = data["imgAlt"];
+		// let art_image = document.createElement('img');
+		// art_image.src = data["imgSrc"];
+		// art_image.alt = data["imgAlt"];
 
-		// Insert <img> into <article>
-		article.appendChild(art_image);
+		// // Insert <img> into <article>
+		// article.appendChild(art_image);
 
-		// Create <p> <a></a> </p> for article
-        let art_title = document.createElement('p');
-        art_title.className = 'title';
+		// // Create <p> <a></a> </p> for article
+        // let art_title = document.createElement('p');
+        // art_title.className = 'title';
 
-        // Create <a> for <p>
-        let art_title_link = document.createElement('a');
-        art_title_link.href = data["titleLnk"];
-        art_title_link.textContent = data["titleTxt"];
-        // Append <a> into <p>
-        art_title.appendChild(art_title_link);
-        // Append <p> into <article>
-        article.appendChild(art_title);
+        // // Create <a> for <p>
+        // let art_title_link = document.createElement('a');
+        // art_title_link.href = data["titleLnk"];
+        // art_title_link.textContent = data["titleTxt"];
+        // // Append <a> into <p>
+        // art_title.appendChild(art_title_link);
+        // // Append <p> into <article>
+        // article.appendChild(art_title);
 
-		// Create <p> for article
-		let ingredients = document.createElement('p');
-		ingredients.setAttribute('class','ingredients');
-		ingredients.textContent = data["ingredients"];
+		// // Create <p> for article
+		// let ingredients = document.createElement('p');
+		// ingredients.setAttribute('class','ingredients');
+		// ingredients.textContent = data["ingredients"];
 
 
-		// Create <div> <span> <img> </span> </div> for article
-		let div_for_art = document.createElement('div');
-		div_for_art.setAttribute('class', 'rating');
-		// create span
-		let span_for_div_for_art = document.createElement('span');
-		span_for_div_for_art.textContent = data["rating"];
-		// insert span to div
-		div_for_art.appendChild(span_for_div_for_art);
-		// create img
-		let img_for_div = document.createElement('img');
-		img_for_div.src = "/assets/images/icons/"+ data["rating"]+"-star.svg";
-		img_for_div.alt = data["rating"] + " stars";
-		// create second span
-		let span_4_div = document.createElement('span');
-		span_4_div.textContent = "("+data["numRatings"]+")";
-		// insert span to div
-		div_for_art.appendChild(span_4_div);	
+		// // Create <div> <span> <img> </span> </div> for article
+		// let div_for_art = document.createElement('div');
+		// div_for_art.setAttribute('class', 'rating');
+		// // create span
+		// let span_for_div_for_art = document.createElement('span');
+		// span_for_div_for_art.textContent = data["rating"];
+		// // insert span to div
+		// div_for_art.appendChild(span_for_div_for_art);
+		// // create img
+		// let img_for_div = document.createElement('img');
+		// img_for_div.src = `./assets/images/icons/${data.rating}-star.svg`;
+		// img_for_div.alt = `${data.rating} stars`;
+		// // create second span
+		// let span_4_div = document.createElement('span');
+		// span_4_div.textContent = `(${data.numRatings})`; // "("+data["numRatings"]+")";
+		// // insert span to div
+		// div_for_art.appendChild(span_4_div);	
 		
 
-		// Create <time> for article
-        let art_time = document.createElement('time');
-        art_time.textContent = data["lengthTime"];
-        article.appendChild(art_time);
+		// // Create <time> for article
+        // let art_time = document.createElement('time');
+        // art_time.textContent = data["lengthTime"];
+        // article.appendChild(art_time);
 
-		// Create <p> for article
-        let art_ingredient = document.createElement('p');
-        art_ingredient.className = 'ingredients';
-        art_ingredient.textContent = data['ingredients'];
-        article.appendChild(art_ingredient);
+		// // Create <p> for article
+        // let art_ingredient = document.createElement('p');
+        // art_ingredient.className = 'ingredients';
+        // art_ingredient.textContent = data['ingredients'];
+        // article.appendChild(art_ingredient);
 	}
 }
 
 // A8. TODO - Define the Class as a customElement so that you can create
 //           'recipe-card' elements
-customeElements.define('recipe-card', RecipeCard);
+customElements.define('recipe-card', RecipeCard);
